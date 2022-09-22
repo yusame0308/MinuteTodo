@@ -12,6 +12,8 @@
 		1AB077D528DC05BB00660B41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AB077D428DC05BB00660B41 /* Assets.xcassets */; };
 		1AB077D828DC05BB00660B41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AB077D628DC05BB00660B41 /* LaunchScreen.storyboard */; };
 		1AB077E128DC067800660B41 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB077E028DC067800660B41 /* HomeViewController.swift */; };
+		1AB077E328DC098800660B41 /* PlanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB077E228DC098700660B41 /* PlanListViewController.swift */; };
+		1AB077E528DC0A4900660B41 /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB077E428DC0A4900660B41 /* PlanViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		1AB077D728DC05BB00660B41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AB077D928DC05BB00660B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AB077E028DC067800660B41 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		1AB077E228DC098700660B41 /* PlanListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanListViewController.swift; sourceTree = "<group>"; };
+		1AB077E428DC0A4900660B41 /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,8 @@
 			isa = PBXGroup;
 			children = (
 				1AB077E028DC067800660B41 /* HomeViewController.swift */,
+				1AB077E228DC098700660B41 /* PlanListViewController.swift */,
+				1AB077E428DC0A4900660B41 /* PlanViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -143,6 +149,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AB077CC28DC05B600660B41 /* AppDelegate.swift in Sources */,
+				1AB077E528DC0A4900660B41 /* PlanViewController.swift in Sources */,
+				1AB077E328DC098800660B41 /* PlanListViewController.swift in Sources */,
 				1AB077CE28DC05B600660B41 /* SceneDelegate.swift in Sources */,
 				1AB077E128DC067800660B41 /* HomeViewController.swift in Sources */,
 			);
