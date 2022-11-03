@@ -45,6 +45,21 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		1AB0158A291369BF00F7413F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1AB0158B291369D400F7413F /* Home */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1AB0158B291369D400F7413F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		1AB077BF28DC05B500660B41 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +79,7 @@
 		1AB077CA28DC05B600660B41 /* DailyPlan */ = {
 			isa = PBXGroup;
 			children = (
+				1AB0158A291369BF00F7413F /* Views */,
 				1AB01587290035E800F7413F /* Extensions */,
 				1AB077DF28DC066300660B41 /* ViewControllers */,
 				1AB077CB28DC05B600660B41 /* AppDelegate.swift */,
