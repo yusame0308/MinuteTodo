@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1AB015892900360600F7413F /* UIView-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB015882900360600F7413F /* UIView-Extension.swift */; };
+		1AB0158F291373C700F7413F /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB0158E291373C700F7413F /* TaskTableViewCell.swift */; };
 		1AB077CC28DC05B600660B41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB077CB28DC05B600660B41 /* AppDelegate.swift */; };
 		1AB077CE28DC05B600660B41 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB077CD28DC05B600660B41 /* SceneDelegate.swift */; };
 		1AB077D528DC05BB00660B41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AB077D428DC05BB00660B41 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		1AB015882900360600F7413F /* UIView-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extension.swift"; sourceTree = "<group>"; };
+		1AB0158E291373C700F7413F /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		1AB077C828DC05B600660B41 /* DailyPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB077CB28DC05B600660B41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AB077CD28DC05B600660B41 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		1AB0158B291369D400F7413F /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1AB0158E291373C700F7413F /* TaskTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			files = (
 				1AB015892900360600F7413F /* UIView-Extension.swift in Sources */,
 				1AB077CC28DC05B600660B41 /* AppDelegate.swift in Sources */,
+				1AB0158F291373C700F7413F /* TaskTableViewCell.swift in Sources */,
 				1AB077CE28DC05B600660B41 /* SceneDelegate.swift in Sources */,
 				1AB077E128DC067800660B41 /* HomeViewController.swift in Sources */,
 			);

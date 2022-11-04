@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
         tv.dataSource = self
         tv.rowHeight = 70
         tv.separatorColor = UIColor.blue
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tv.register(TaskTableViewCell.self, forCellReuseIdentifier: cellId)
         return tv
     }()
     
@@ -45,7 +45,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: cellId)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TaskTableViewCell
         cell.textLabel?.text = exampleArray[indexPath.row]
         
         return cell
