@@ -11,7 +11,7 @@ class TaskTableViewCell: UITableViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
     
@@ -26,7 +26,21 @@ class TaskTableViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
-
+    
+    let checkButton: UIButton = {
+        let button = UIButton()
+//        button.backgroundColor = .clear
+//        button.layer.cornerRadius = 15
+//        button.addInnerShadow()
+        return button
+    }()
+    
+    let checkmarkImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.image = UIImage(systemName: "checkmark", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
+        iv.tintColor = .systemGreen
+        return iv
+    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,22 +48,45 @@ class TaskTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        if selected {
+            self.contentView.addInnerShadow()
+        } else {
+            self.contentView.addOuterShadow()
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
-        addSubview(titleLabel)
-        addSubview(timeLabel)
-        addSubview(limitLabel)
-        
-        titleLabel.anchor(top: self.topAnchor, left: self.leftAnchor, topPadding: 10, leftPadding: 30)
-        timeLabel.anchor(top: titleLabel.bottomAnchor, bottom: self.bottomAnchor, left: titleLabel.leftAnchor, bottomPadding: 10)
-        limitLabel.anchor(left: titleLabel.rightAnchor, right: self.rightAnchor, centerY: self.centerYAnchor, width: 50, leftPadding: 10, rightPadding: 20)
+        setupLayout()
+        self.selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10))
+    }
+    
+    private func setupLayout() {
+        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 4
+        
+        addSubview(checkButton)
+        addSubview(titleLabel)
+        addSubview(timeLabel)
+        addSubview(limitLabel)
+        addSubview(checkmarkImageView)
+        
+        checkButton.anchor(left: self.leftAnchor, centerY: self.centerYAnchor, width: 30, height: 30, leftPadding: 20)
+        titleLabel.anchor(top: self.topAnchor, left: checkButton.rightAnchor, topPadding: 20, leftPadding: 10)
+        timeLabel.anchor(top: titleLabel.bottomAnchor, bottom: self.bottomAnchor, left: titleLabel.leftAnchor, bottomPadding: 20)
+        limitLabel.anchor(left: titleLabel.rightAnchor, right: self.rightAnchor, centerY: self.centerYAnchor, width: 50, leftPadding: 10, rightPadding: 20)
+        checkmarkImageView.anchor(centerY: checkButton.centerYAnchor, centerX: checkButton.centerXAnchor, width: 15, height: 15)
     }
     
     func setCell(title: String, time: Int, limit: String) {
