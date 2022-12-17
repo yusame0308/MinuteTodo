@@ -11,9 +11,9 @@ class HomeViewController: UIViewController {
     
     private let cellId = "cellId"
     
-    var titles: [String] = ["0番上のセル", "セル", "2番目のセルテストテストあああああああああああああああああああ"]
-    var times: [Int] = [30, 40, 120]
-    var limits: [String] = ["11/1", "11/12", "11/25"]
+    var titles: [String] = ["0番上のセル", "セル", "2番目のセルテストテストあああああああああああああああああああ", "test", "test", "test", "test", "test", "test"]
+    var times: [Int] = [30, 40, 120, 120, 120, 120, 120, 120, 120]
+    var limits: [String] = ["11/1", "11/12", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25"]
     
     lazy var taskTableView: UITableView = {
         let tv = UITableView()

@@ -30,6 +30,7 @@ class TaskTableViewCell: UITableViewCell {
     let checkmarkImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "checkmark", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
+        iv.tintColor = .systemGray
         return iv
     }()
     
@@ -40,11 +41,25 @@ class TaskTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
-            contentView.addInnerShadow()
-            checkmarkImageView.tintColor = .systemGreen
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
+                self.hideShadow()
+            }, completion: { _ in
+                self.contentView.backgroundColor = .clear
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
+                    self.addInnerShadow()
+                    self.checkmarkImageView.tintColor = .systemGreen
+                }, completion: nil)
+            })
         } else {
-            contentView.addOuterShadow()
-            checkmarkImageView.tintColor = .systemGray
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
+                self.hideShadow()
+            }, completion: { _ in
+                self.contentView.backgroundColor = .white
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
+                    self.addOuterShadow()
+                    self.checkmarkImageView.tintColor = .systemGray
+                }, completion: nil)
+            })
         }
     }
     
@@ -67,6 +82,7 @@ class TaskTableViewCell: UITableViewCell {
     private func setupLayout() {
         selectionStyle = .none
         contentView.layer.cornerRadius = 4
+        contentView.addShadow()
         
         addSubview(titleLabel)
         addSubview(timeLabel)
@@ -77,6 +93,20 @@ class TaskTableViewCell: UITableViewCell {
         titleLabel.anchor(top: self.topAnchor, left: checkmarkImageView.rightAnchor, topPadding: 20, leftPadding: 15)
         timeLabel.anchor(top: titleLabel.bottomAnchor, bottom: self.bottomAnchor, left: titleLabel.leftAnchor, bottomPadding: 20)
         limitLabel.anchor(left: titleLabel.rightAnchor, right: self.rightAnchor, centerY: self.centerYAnchor, width: 50, leftPadding: 10, rightPadding: 10)
+    }
+    
+    private func addInnerShadow() {
+        contentView.layer.shadowOpacity = 0.4
+        contentView.layer.masksToBounds = true
+    }
+    
+    private func addOuterShadow() {
+        contentView.layer.shadowOpacity = 0.4
+        contentView.layer.masksToBounds = false
+    }
+    
+    private func hideShadow() {
+        contentView.layer.shadowOpacity = 0.1
     }
     
     func setCell(title: String, time: Int, limit: String) {
