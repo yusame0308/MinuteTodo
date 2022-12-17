@@ -27,18 +27,9 @@ class TaskTableViewCell: UITableViewCell {
         return label
     }()
     
-    let checkButton: UIButton = {
-        let button = UIButton()
-//        button.backgroundColor = .clear
-//        button.layer.cornerRadius = 15
-//        button.addInnerShadow()
-        return button
-    }()
-    
     let checkmarkImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "checkmark", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
-        iv.tintColor = .systemGreen
         return iv
     }()
     
@@ -49,9 +40,11 @@ class TaskTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
-            self.contentView.addInnerShadow()
+            contentView.addInnerShadow()
+            checkmarkImageView.tintColor = .systemGreen
         } else {
-            self.contentView.addOuterShadow()
+            contentView.addOuterShadow()
+            checkmarkImageView.tintColor = .systemGray
         }
     }
     
@@ -75,17 +68,15 @@ class TaskTableViewCell: UITableViewCell {
         selectionStyle = .none
         contentView.layer.cornerRadius = 4
         
-        addSubview(checkButton)
         addSubview(titleLabel)
         addSubview(timeLabel)
         addSubview(limitLabel)
         addSubview(checkmarkImageView)
         
-        checkButton.anchor(left: self.leftAnchor, centerY: self.centerYAnchor, width: 30, height: 30, leftPadding: 20)
-        titleLabel.anchor(top: self.topAnchor, left: checkButton.rightAnchor, topPadding: 20, leftPadding: 10)
+        checkmarkImageView.anchor(left: self.leftAnchor, centerY: self.centerYAnchor, width: 15, height: 15, leftPadding: 25)
+        titleLabel.anchor(top: self.topAnchor, left: checkmarkImageView.rightAnchor, topPadding: 20, leftPadding: 15)
         timeLabel.anchor(top: titleLabel.bottomAnchor, bottom: self.bottomAnchor, left: titleLabel.leftAnchor, bottomPadding: 20)
-        limitLabel.anchor(left: titleLabel.rightAnchor, right: self.rightAnchor, centerY: self.centerYAnchor, width: 50, leftPadding: 10, rightPadding: 20)
-        checkmarkImageView.anchor(centerY: checkButton.centerYAnchor, centerX: checkButton.centerXAnchor, width: 15, height: 15)
+        limitLabel.anchor(left: titleLabel.rightAnchor, right: self.rightAnchor, centerY: self.centerYAnchor, width: 50, leftPadding: 10, rightPadding: 10)
     }
     
     func setCell(title: String, time: Int, limit: String) {
