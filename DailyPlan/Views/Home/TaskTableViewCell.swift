@@ -59,7 +59,6 @@ class TaskTableViewCell: UITableViewCell {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
         setupLayout()
-        self.selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
@@ -73,7 +72,7 @@ class TaskTableViewCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        contentView.backgroundColor = .white
+        selectionStyle = .none
         contentView.layer.cornerRadius = 4
         
         addSubview(checkButton)
