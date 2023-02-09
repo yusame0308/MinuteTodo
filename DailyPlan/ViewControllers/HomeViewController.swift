@@ -12,9 +12,9 @@ class HomeViewController: UIViewController {
     
     private let cellId = "cellId"
     
-    var titles: [String] = ["0番上のセル", "セル", "2番目のセルテストテストあああああああああああああああああああ", "test", "test", "test", "test", "test", "test"]
-    var times: [Int] = [30, 40, 120, 120, 120, 120, 120, 120, 120]
-    var limits: [String] = ["11/1", "11/12", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25"]
+    var titles: [String] = ["0番上のセル", "セル", "2番目のセルテストテストあああああああああああああああああああ", "test", "test", "test", "test", "test", "test", "test", "test", "test"]
+    var times: [Int] = [30, 40, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120]
+    var limits: [String] = ["11/1", "11/12", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25"]
     
     var taskItems: Results<Task>!
     
@@ -27,20 +27,34 @@ class HomeViewController: UIViewController {
         return tv
     }()
     
+    let addButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .light))
+        button.setImage(image, for: .normal)
+        button.layer.cornerRadius = 25
+        button.tintColor = .darkGray
+        button.backgroundColor = .white
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let realm = try! Realm()
         taskItems = realm.objects(Task.self)
+        
         setupLayout()
     }
     
     private func setupLayout() {
-        view.backgroundColor = .green
+        view.backgroundColor = .white
+        addButton.addShadow()
         
         view.addSubview(taskTableView)
+        view.addSubview(addButton)
         
-        taskTableView.anchor(top: view.topAnchor, bottom: view.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor)
+        taskTableView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor)
+        addButton.anchor(top: taskTableView.bottomAnchor, bottom: view.bottomAnchor, centerX: view.centerXAnchor, width: 50, height: 50, topPadding: 15, bottomPadding: 30)
     }
     
 }
