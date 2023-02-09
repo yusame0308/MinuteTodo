@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class HomeViewController: UIViewController {
     
@@ -14,6 +15,8 @@ class HomeViewController: UIViewController {
     var titles: [String] = ["0番上のセル", "セル", "2番目のセルテストテストあああああああああああああああああああ", "test", "test", "test", "test", "test", "test"]
     var times: [Int] = [30, 40, 120, 120, 120, 120, 120, 120, 120]
     var limits: [String] = ["11/1", "11/12", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25"]
+    
+    var taskItems: Results<Task>!
     
     lazy var taskTableView: UITableView = {
         let tv = UITableView()
@@ -27,6 +30,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let realm = try! Realm()
+        taskItems = realm.objects(Task.self)
         setupLayout()
     }
     
