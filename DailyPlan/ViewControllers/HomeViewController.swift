@@ -32,9 +32,15 @@ class HomeViewController: UIViewController {
         let image = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .light))
         button.setImage(image, for: .normal)
         button.layer.cornerRadius = 25
-        button.tintColor = .darkGray
+        button.tintColor = .systemGray
         button.backgroundColor = .white
         return button
+    }()
+    
+    let bottomSeparator: UIView = {
+        let bs = UIView()
+        bs.backgroundColor = .systemGray5
+        return bs
     }()
     
     override func viewDidLoad() {
@@ -51,9 +57,11 @@ class HomeViewController: UIViewController {
         addButton.addShadow()
         
         view.addSubview(taskTableView)
+        view.addSubview(bottomSeparator)
         view.addSubview(addButton)
         
         taskTableView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor)
+        bottomSeparator.anchor(bottom: taskTableView.bottomAnchor, width: view.frame.width, height: 2)
         addButton.anchor(top: taskTableView.bottomAnchor, bottom: view.bottomAnchor, centerX: view.centerXAnchor, width: 50, height: 50, topPadding: 15, bottomPadding: 30)
     }
     
