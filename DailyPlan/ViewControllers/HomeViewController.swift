@@ -81,7 +81,10 @@ class HomeViewController: UIViewController {
             sheet.detents = [.medium()]
             sheet.largestUndimmedDetentIdentifier = .medium
         }
-        present(vc, animated: true, completion: nil)
+        vc.presentationController?.delegate = self
+        present(vc, animated: true, completion: { [self] in
+            taskTableView.contentInset.bottom = self.view.frame.height/2-50
+        })
     }
 }
 
@@ -97,4 +100,13 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     
+}
+
+extension HomeViewController: UIAdaptivePresentationControllerDelegate {
+    //Modalのdismissを検知
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseInOut], animations: {
+            self.taskTableView.contentInset.bottom = 0
+        }, completion: nil)
+    }
 }
