@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
         tv.delegate = self
         tv.dataSource = self
         tv.separatorStyle = .none
+        tv.contentInsetAdjustmentBehavior = .never
         tv.register(TaskTableViewCell.self, forCellReuseIdentifier: cellId)
         return tv
     }()
@@ -56,6 +57,12 @@ class HomeViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        taskTableView.anchor(top: view.topAnchor, topPadding: view.safeAreaInsets.top)
+    }
+    
     private func setupLayout() {
         view.backgroundColor = .white
         
@@ -63,8 +70,8 @@ class HomeViewController: UIViewController {
         view.addSubview(bottomSeparator)
         view.addSubview(addButton)
         
-        taskTableView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor)
-        bottomSeparator.anchor(bottom: taskTableView.bottomAnchor, width: view.frame.width, height: 2)
+        taskTableView.anchor(left: view.leftAnchor, right: view.rightAnchor)
+        bottomSeparator.anchor(bottom: taskTableView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 2)
         addButton.anchor(top: taskTableView.bottomAnchor, bottom: view.bottomAnchor, centerX: view.centerXAnchor, width: 50, height: 50, topPadding: 15, bottomPadding: 30)
     }
     
