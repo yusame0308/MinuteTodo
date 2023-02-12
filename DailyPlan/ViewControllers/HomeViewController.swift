@@ -27,13 +27,17 @@ class HomeViewController: UIViewController {
         return tv
     }()
     
-    let addButton: UIButton = {
+    lazy var addButton: UIButton = {
         let button = UIButton()
         let image = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .light))
         button.setImage(image, for: .normal)
         button.layer.cornerRadius = 25
         button.tintColor = .systemGray
         button.backgroundColor = .white
+        button.addShadow()
+        button.addAction(UIAction { [self] _ in
+            self.showModal()
+        }, for: .primaryActionTriggered)
         return button
     }()
     
@@ -54,7 +58,6 @@ class HomeViewController: UIViewController {
     
     private func setupLayout() {
         view.backgroundColor = .white
-        addButton.addShadow()
         
         view.addSubview(taskTableView)
         view.addSubview(bottomSeparator)
@@ -65,6 +68,14 @@ class HomeViewController: UIViewController {
         addButton.anchor(top: taskTableView.bottomAnchor, bottom: view.bottomAnchor, centerX: view.centerXAnchor, width: 50, height: 50, topPadding: 15, bottomPadding: 30)
     }
     
+    private func showModal() {
+        let vc = AddViewController()
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.largestUndimmedDetentIdentifier = .medium
+        }
+        present(vc, animated: true, completion: nil)
+    }
 }
 
 extension HomeViewController: UITableViewDelegate,UITableViewDataSource {

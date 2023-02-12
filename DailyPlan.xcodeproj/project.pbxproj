@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A95DD8D2996496000526975 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95DD8C2996496000526975 /* AddViewController.swift */; };
 		1A9B3FC02994EE07009D5B6C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B3FBF2994EE06009D5B6C /* Task.swift */; };
 		1AAD3D59295DC2D80059B107 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 1AAD3D58295DC2D80059B107 /* Realm */; };
 		1AAD3D5B295DC2D80059B107 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1AAD3D5A295DC2D80059B107 /* RealmSwift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A95DD8C2996496000526975 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		1A9B3FBF2994EE06009D5B6C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		1AB015882900360600F7413F /* UIView-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extension.swift"; sourceTree = "<group>"; };
 		1AB0158E291373C700F7413F /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				1AB077E028DC067800660B41 /* HomeViewController.swift */,
+				1A95DD8C2996496000526975 /* AddViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			files = (
 				1AB015892900360600F7413F /* UIView-Extension.swift in Sources */,
 				1AB077CC28DC05B600660B41 /* AppDelegate.swift in Sources */,
+				1A95DD8D2996496000526975 /* AddViewController.swift in Sources */,
 				1AB0158F291373C700F7413F /* TaskTableViewCell.swift in Sources */,
 				1AB077CE28DC05B600660B41 /* SceneDelegate.swift in Sources */,
 				1A9B3FC02994EE07009D5B6C /* Task.swift in Sources */,
