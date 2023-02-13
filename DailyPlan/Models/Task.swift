@@ -12,4 +12,5 @@ class Task: Object {
     @objc dynamic var title = ""
     @objc dynamic var length = 0
     @objc dynamic var limit = Date()
+    @objc dynamic var isDone = false
 }
