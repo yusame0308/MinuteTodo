@@ -9,7 +9,7 @@ import UIKit
 
 class AddTextField: UITextField {
     
-    init(placeHolder: String) {
+    init(placeHolder: String, type: UIKeyboardType = .default) {
         super.init(frame: .zero)
         
         placeholder = placeHolder
@@ -19,6 +19,7 @@ class AddTextField: UITextField {
         layer.borderColor = UIColor.systemGray4.cgColor
         layer.cornerRadius = 5
         font = .systemFont(ofSize: 16)
+        keyboardType = type
     }
     
     required init?(coder: NSCoder) {
