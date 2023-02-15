@@ -9,8 +9,8 @@ import Foundation
 import RealmSwift
 
 class Task: Object {
-    @objc dynamic var title = ""
-    @objc dynamic var length = 0
-    @objc dynamic var limit = Date()
-    @objc dynamic var isDone = false
+    @Persisted var title: String
+    @Persisted var length: Int?
+    @Persisted var limit: Date?
+    @Persisted var isDone = false
 }
