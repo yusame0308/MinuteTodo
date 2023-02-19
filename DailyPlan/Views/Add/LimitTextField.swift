@@ -11,7 +11,8 @@ class LimitTextField: AddTextField {
     
     let limitDatePicker: UIDatePicker = {
         let picker = UIDatePicker()
-        picker.preferredDatePickerStyle = .compact
+        picker.preferredDatePickerStyle = .inline
+        picker.backgroundColor = .white
         picker.datePickerMode = .date
         picker.locale = Locale(identifier: "ja_JP")
         picker.timeZone = TimeZone(identifier: "Asia/Tokyo")
@@ -19,7 +20,7 @@ class LimitTextField: AddTextField {
     }()
 
     init() {
-        super.init(placeHolder: "期限", fontSize: 16)
+        super.init(placeHolder: "期限", fontSize: 15)
         
         inputView = limitDatePicker
         inputAccessoryView = LimitToolBar()

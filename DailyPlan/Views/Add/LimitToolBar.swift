@@ -9,11 +9,12 @@ import UIKit
 
 class LimitToolBar: UIToolbar {
     
-    let spaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    let flexibleSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+    let fixedSpaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
     let doneItem: UIBarButtonItem = {
         let button = UIButton()
         button.setTitle("完了", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         button.addAction(UIAction { [self] _ in
         }, for: .primaryActionTriggered)
         return UIBarButtonItem(customView: button)
@@ -22,7 +23,10 @@ class LimitToolBar: UIToolbar {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.setItems([spaceItem,doneItem], animated: true)
+        fixedSpaceItem.width = 20
+        self.setItems([flexibleSpaceItem, doneItem, fixedSpaceItem], animated: true)
+        self.barTintColor = .white
+        self.anchor(height: 50)
     }
     
     required init?(coder: NSCoder) {
