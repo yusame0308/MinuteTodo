@@ -35,15 +35,19 @@ class LimitTextField: AddTextField {
         super.init(placeHolder: "期限", fontSize: 15)
         
         inputView = limitDatePicker
-        inputAccessoryView = LimitToolBar(action: doneDatePicker)
+        inputAccessoryView = LimitToolBar(doneAction: doneDatePickerAction, cancelAction: cancelDatePickerAction)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func doneDatePicker() {
+    private func doneDatePickerAction() {
         updateTextField(newDate: selectedDate)
+        endEditing(true)
+    }
+    
+    private func cancelDatePickerAction() {
         endEditing(true)
     }
     

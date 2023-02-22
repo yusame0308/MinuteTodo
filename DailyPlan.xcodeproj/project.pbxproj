@@ -11,6 +11,7 @@
 		1A95DD92299A093900526975 /* AddTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95DD91299A093900526975 /* AddTextField.swift */; };
 		1A95DD9429A200E700526975 /* LimitTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95DD9329A200E700526975 /* LimitTextField.swift */; };
 		1A95DD9629A2039D00526975 /* LimitToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95DD9529A2039D00526975 /* LimitToolBar.swift */; };
+		1A95DD9829A63CCC00526975 /* UIBarButtonItem-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95DD9729A63CCC00526975 /* UIBarButtonItem-Extension.swift */; };
 		1A9B3FC02994EE07009D5B6C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B3FBF2994EE06009D5B6C /* Task.swift */; };
 		1AAD3D59295DC2D80059B107 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 1AAD3D58295DC2D80059B107 /* Realm */; };
 		1AAD3D5B295DC2D80059B107 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1AAD3D5A295DC2D80059B107 /* RealmSwift */; };
@@ -28,6 +29,7 @@
 		1A95DD91299A093900526975 /* AddTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTextField.swift; sourceTree = "<group>"; };
 		1A95DD9329A200E700526975 /* LimitTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitTextField.swift; sourceTree = "<group>"; };
 		1A95DD9529A2039D00526975 /* LimitToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitToolBar.swift; sourceTree = "<group>"; };
+		1A95DD9729A63CCC00526975 /* UIBarButtonItem-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem-Extension.swift"; sourceTree = "<group>"; };
 		1A9B3FBF2994EE06009D5B6C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		1AB015882900360600F7413F /* UIView-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extension.swift"; sourceTree = "<group>"; };
 		1AB0158E291373C700F7413F /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				1AB015882900360600F7413F /* UIView-Extension.swift */,
+				1A95DD9729A63CCC00526975 /* UIBarButtonItem-Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			files = (
 				1AB015892900360600F7413F /* UIView-Extension.swift in Sources */,
 				1A95DD9629A2039D00526975 /* LimitToolBar.swift in Sources */,
+				1A95DD9829A63CCC00526975 /* UIBarButtonItem-Extension.swift in Sources */,
 				1A95DD9429A200E700526975 /* LimitTextField.swift in Sources */,
 				1AB077CC28DC05B600660B41 /* AppDelegate.swift in Sources */,
 				1A95DD8D2996496000526975 /* AddViewController.swift in Sources */,
