@@ -14,12 +14,13 @@ class LimitToolBar: UIToolbar {
     let cancelItem = UIBarButtonItem().createToolBarButtonItem(title: "キャンセル")
     let doneItem = UIBarButtonItem().createToolBarButtonItem(title: "完了")
     
-    init(doneAction: @escaping () -> Void, cancelAction: @escaping () -> Void) {
+    init(doneAction: @escaping () -> Void, cancelAction: @escaping () -> Void, action: @escaping () -> Void) {
         super.init(frame: .zero)
         
         let doneButton = doneItem.customView as! UIButton
         doneButton.addAction(UIAction { _ in
             doneAction()
+            action()
         }, for: .primaryActionTriggered)
         
         let cancelButton = cancelItem.customView as! UIButton

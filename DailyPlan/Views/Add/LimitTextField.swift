@@ -31,11 +31,11 @@ class LimitTextField: AddTextField {
         }
     }
 
-    init() {
+    init(action: @escaping () -> Void) {
         super.init(placeHolder: "期限", fontSize: 15)
         
         inputView = limitDatePicker
-        inputAccessoryView = LimitToolBar(doneAction: doneDatePickerAction, cancelAction: cancelDatePickerAction)
+        inputAccessoryView = LimitToolBar(doneAction: doneDatePickerAction, cancelAction: cancelDatePickerAction, action: action)
     }
     
     required init?(coder: NSCoder) {
