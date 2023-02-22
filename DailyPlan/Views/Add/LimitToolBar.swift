@@ -15,18 +15,21 @@ class LimitToolBar: UIToolbar {
         let button = UIButton()
         button.setTitle("完了", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-        button.addAction(UIAction { [self] _ in
-        }, for: .primaryActionTriggered)
         return UIBarButtonItem(customView: button)
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(action: @escaping () -> Void) {
+        super.init(frame: .zero)
+        
+        let button = doneItem.customView as! UIButton
+        button.addAction(UIAction { _ in
+            action()
+        }, for: .primaryActionTriggered)
         
         fixedSpaceItem.width = 20
         self.setItems([flexibleSpaceItem, doneItem, fixedSpaceItem], animated: true)
         self.barTintColor = .white
-        self.anchor(height: 50)
+        self.anchor(height: 40)
     }
     
     required init?(coder: NSCoder) {

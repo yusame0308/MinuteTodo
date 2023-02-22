@@ -17,6 +17,7 @@ class AddViewController: UIViewController {
         label.font = .systemFont(ofSize: 16)
         return label
     }()
+    lazy var limitTextField = LimitTextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +28,9 @@ class AddViewController: UIViewController {
     private func setupLayout() {
         view.backgroundColor = UIColor(red: 252/255, green: 252/255, blue: 252/255, alpha: 0.95)
         
-        let baseStackView = UIStackView(arrangedSubviews: [titleTextField, lengthTextField])
+        let baseStackView = UIStackView(arrangedSubviews: [titleTextField, lengthTextField, limitTextField])
         baseStackView.axis = .vertical
-        baseStackView.distribution = .fillProportionally
+        baseStackView.distribution = .equalSpacing
         baseStackView.alignment = .center
         baseStackView.spacing = 20
         
@@ -39,6 +40,7 @@ class AddViewController: UIViewController {
         titleTextField.anchor(left: baseStackView.leftAnchor, right: baseStackView.rightAnchor, height: 40)
         lengthTextField.anchor(width: 80, height: 30)
         minuteLabel.anchor(bottom: lengthTextField.bottomAnchor, left: lengthTextField.rightAnchor, bottomPadding: 4, leftPadding: 4)
+        limitTextField.anchor(height: 30)
         baseStackView.anchor(left: view.leftAnchor, right: view.rightAnchor, centerY: view.centerYAnchor, leftPadding: 60, rightPadding: 60)
     }
 }
