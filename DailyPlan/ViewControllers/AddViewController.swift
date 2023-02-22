@@ -14,10 +14,13 @@ class AddViewController: UIViewController {
         let label = UILabel()
         label.text = "分"
         label.textColor = .systemGray3
-        label.font = .systemFont(ofSize: 16)
+        label.font = .systemFont(ofSize: 15)
         return label
     }()
     lazy var limitTextField = LimitTextField()
+    lazy var clearButton = UIButton().createClearButton {
+        self.limitTextField.text = ""
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +39,13 @@ class AddViewController: UIViewController {
         
         view.addSubview(baseStackView)
         view.addSubview(minuteLabel)
+        view.addSubview(clearButton)
         
         titleTextField.anchor(left: baseStackView.leftAnchor, right: baseStackView.rightAnchor, height: 40)
         lengthTextField.anchor(width: 80, height: 30)
-        minuteLabel.anchor(bottom: lengthTextField.bottomAnchor, left: lengthTextField.rightAnchor, bottomPadding: 4, leftPadding: 4)
+        minuteLabel.anchor(left: lengthTextField.rightAnchor, centerY: lengthTextField.centerYAnchor, leftPadding: 4)
         limitTextField.anchor(height: 30)
+        clearButton.anchor(left: limitTextField.rightAnchor, centerY: limitTextField.centerYAnchor, leftPadding: 4)
         baseStackView.anchor(left: view.leftAnchor, right: view.rightAnchor, centerY: view.centerYAnchor, leftPadding: 60, rightPadding: 60)
     }
 }
