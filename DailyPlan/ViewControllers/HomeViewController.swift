@@ -100,6 +100,32 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // Edit
+        let editAction = UIContextualAction(style: .normal  , title: "edit") {
+            (ctxAction, view, completionHandler) in
+            print("edit")
+            completionHandler(true)
+        }
+        let editImage = UIImage(systemName: "square.and.pencil", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))?.withTintColor(UIColor.white, renderingMode: .alwaysTemplate)
+        editAction.image = editImage
+        editAction.backgroundColor = UIColor(red: 0/255, green: 125/255, blue: 255/255, alpha: 1)
+        
+        // Delete
+        let deleteAction = UIContextualAction(style: .destructive, title:"delete") {
+            (ctxAction, view, completionHandler) in
+            print("delete")
+            completionHandler(true)
+        }
+        let deleteImage = UIImage(systemName: "trash.fill")?.withTintColor(UIColor.white , renderingMode: .alwaysTemplate)
+        deleteAction.image = deleteImage
+        deleteAction.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
+        
+        let swipeAction = UISwipeActionsConfiguration(actions:[deleteAction, editAction])
+        swipeAction.performsFirstActionWithFullSwipe = false
+        
+        return swipeAction
+    }
 }
 
 extension HomeViewController: UIAdaptivePresentationControllerDelegate {
