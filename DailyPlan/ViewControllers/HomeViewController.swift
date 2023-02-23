@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
         tv.dataSource = self
         tv.separatorStyle = .none
         tv.contentInsetAdjustmentBehavior = .never
+        tv.showsVerticalScrollIndicator = false
         tv.register(TaskTableViewCell.self, forCellReuseIdentifier: cellId)
         return tv
     }()
@@ -80,6 +81,7 @@ class HomeViewController: UIViewController {
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium()]
             sheet.largestUndimmedDetentIdentifier = .medium
+            sheet.preferredCornerRadius = 40
         }
         vc.presentationController?.delegate = self
         present(vc, animated: true, completion: { [self] in

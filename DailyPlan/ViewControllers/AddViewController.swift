@@ -8,6 +8,7 @@
 import UIKit
 
 class AddViewController: UIViewController {
+    private let gradientLayer = CAGradientLayer()
     let titleTextField = AddTextField(placeHolder: "タイトル")
     let lengthTextField = AddTextField(placeHolder: "所要時間", type: .numberPad, fontSize: 15)
     let minuteLabel: UILabel = {
@@ -29,13 +30,19 @@ class AddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupGradientLayer()
         setupLayout()
         setupActions()
     }
     
+    private func setupGradientLayer() {
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [UIColor.systemGray6.withAlphaComponent(0.9).cgColor, UIColor.white.cgColor]
+        gradientLayer.locations = [0.0, 0.2]
+        view.layer.addSublayer(gradientLayer)
+    }
+    
     private func setupLayout() {
-        view.backgroundColor = UIColor(red: 252/255, green: 252/255, blue: 252/255, alpha: 0.95)
-        
         let baseStackView = UIStackView(arrangedSubviews: [titleTextField, lengthTextField, limitTextField])
         baseStackView.axis = .vertical
         baseStackView.distribution = .equalSpacing
@@ -58,7 +65,7 @@ class AddViewController: UIViewController {
         limitTextField.anchor(height: 30)
         clearButton.anchor(left: limitTextField.rightAnchor, centerY: limitTextField.centerYAnchor, leftPadding: 3)
         addButton.anchor(top: baseStackView.bottomAnchor, centerX: view.centerXAnchor, width: 80, height: 40, topPadding: 40)
-        baseStackView.anchor(left: view.leftAnchor, right: view.rightAnchor, centerY: view.centerYAnchor, leftPadding: 60, rightPadding: 60)
+        baseStackView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, topPadding: 150, leftPadding: 60, rightPadding: 60)
     }
     
     private func setupActions() {
