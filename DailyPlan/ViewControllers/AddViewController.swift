@@ -65,7 +65,7 @@ class AddViewController: UIViewController {
         limitTextField.anchor(height: 30)
         clearButton.anchor(left: limitTextField.rightAnchor, centerY: limitTextField.centerYAnchor, leftPadding: 3)
         addButton.anchor(top: baseStackView.bottomAnchor, centerX: view.centerXAnchor, width: 80, height: 40, topPadding: 40)
-        baseStackView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, topPadding: 150, leftPadding: 60, rightPadding: 60)
+        baseStackView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, topPadding: view.frame.height/4-80, leftPadding: 60, rightPadding: 60)
     }
     
     private func setupActions() {
