@@ -109,7 +109,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         }
         let editImage = UIImage(systemName: "square.and.pencil", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))?.withTintColor(UIColor.white, renderingMode: .alwaysTemplate)
         editAction.image = editImage
-        editAction.backgroundColor = UIColor(red: 0/255, green: 125/255, blue: 255/255, alpha: 1)
+        editAction.backgroundColor = .systemBlue
         
         // Delete
         let deleteAction = UIContextualAction(style: .destructive, title:"delete") {
@@ -117,9 +117,9 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
             print("delete")
             completionHandler(true)
         }
-        let deleteImage = UIImage(systemName: "trash.fill")?.withTintColor(UIColor.white , renderingMode: .alwaysTemplate)
+        let deleteImage = UIImage(systemName: "trash", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold))?.withTintColor(UIColor.white , renderingMode: .alwaysTemplate)
         deleteAction.image = deleteImage
-        deleteAction.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
+        deleteAction.backgroundColor = .systemRed
         
         let swipeAction = UISwipeActionsConfiguration(actions:[deleteAction, editAction])
         swipeAction.performsFirstActionWithFullSwipe = false
