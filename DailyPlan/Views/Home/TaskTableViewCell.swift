@@ -34,6 +34,26 @@ class TaskTableViewCell: UITableViewCell {
         return iv
     }()
     
+    let editButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "square.and.pencil", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold)), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .systemBlue.withAlphaComponent(0.4)
+        return button
+    }()
+    
+    let deleteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "trash", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold)), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .systemRed.withAlphaComponent(0.4)
+        button.layer.cornerRadius = 4
+        button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+        return button
+    }()
+    
+    lazy var titleLabelInitialWidth = titleLabel.frame.width
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -67,6 +87,7 @@ class TaskTableViewCell: UITableViewCell {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
         setupLayout()
+        setupActions()
     }
     
     required init?(coder: NSCoder) {
@@ -88,11 +109,16 @@ class TaskTableViewCell: UITableViewCell {
         addSubview(timeLabel)
         addSubview(limitLabel)
         addSubview(checkmarkImageView)
+        addSubview(editButton)
+        addSubview(deleteButton)
         
         checkmarkImageView.anchor(left: self.leftAnchor, centerY: self.centerYAnchor, width: 15, height: 15, leftPadding: 25)
         titleLabel.anchor(top: self.topAnchor, left: checkmarkImageView.rightAnchor, topPadding: 20, leftPadding: 15)
         timeLabel.anchor(top: titleLabel.bottomAnchor, bottom: self.bottomAnchor, left: titleLabel.leftAnchor, bottomPadding: 20)
         limitLabel.anchor(left: titleLabel.rightAnchor, right: self.rightAnchor, centerY: self.centerYAnchor, width: 50, leftPadding: 10, rightPadding: 10)
+        editButton.anchor(top: self.topAnchor, bottom: self.bottomAnchor, width: 0, topPadding: 8, bottomPadding: 8)
+        deleteButton.anchor(top: self.topAnchor, bottom: self.bottomAnchor, left: editButton.rightAnchor, right: self.rightAnchor, width: 0, topPadding: 8, bottomPadding: 8, rightPadding: 10)
+        
     }
     
     private func addInnerShadow() {
@@ -113,6 +139,40 @@ class TaskTableViewCell: UITableViewCell {
         titleLabel.text = title
         timeLabel.text = String(time)
         limitLabel.text = limit
+    }
+    
+    private func setupActions() {
+        let swipeGesture = HorizontalPanGestureRecognizer(target: self, action: #selector(swipeAction))
+        self.contentView.addGestureRecognizer(swipeGesture)
+    }
+    
+}
+
+// Gesture Actions
+extension TaskTableViewCell {
+    
+    @objc private func swipeAction(gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: self)
+        
+        if gesture.state == .changed {
+            self.handleSwipeChanged(translation: translation)
+        } else if gesture.state == .ended {
+            self.handleSwipeEnded(translation: translation)
+        }
+    }
+    
+    private func handleSwipeChanged(translation: CGPoint) {
+        self.limitLabel.transform = CGAffineTransform(translationX: translation.x, y: 0)
+        self.titleLabel.frame.size.width = titleLabelInitialWidth + translation.x
+        
+        self.editButton.frame.size.width = -translation.x / 2
+        self.editButton.transform = CGAffineTransform(translationX: translation.x + 0.1, y: 0)
+        self.deleteButton.frame.size.width = -translation.x / 2
+        self.deleteButton.transform = CGAffineTransform(translationX: translation.x / 2, y: 0)
+    }
+    
+    private func handleSwipeEnded(translation: CGPoint) {
+        print("ended")
     }
     
 }
