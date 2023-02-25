@@ -34,23 +34,9 @@ class TaskTableViewCell: UITableViewCell {
         return iv
     }()
     
-    let editButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "square.and.pencil", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold)), for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = .systemBlue.withAlphaComponent(0.4)
-        return button
-    }()
+    let editButton = SwipeButton(imageName: "square.and.pencil", color: .systemBlue)
     
-    let deleteButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "trash", withConfiguration: UIImage.SymbolConfiguration(weight: .semibold)), for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = .systemRed.withAlphaComponent(0.4)
-        button.layer.cornerRadius = 4
-        button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
-        return button
-    }()
+    let deleteButton = SwipeButton(imageName: "trash", color: .systemRed, radius: 4)
     
     lazy var titleLabelInitialWidth = titleLabel.frame.width
     
