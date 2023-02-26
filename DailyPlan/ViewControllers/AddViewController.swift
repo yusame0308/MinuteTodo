@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AddViewController: UIViewController {
     private let gradientLayer = CAGradientLayer()
@@ -23,8 +24,8 @@ class AddViewController: UIViewController {
         self.limitTextField.text = ""
         self.changeClearButtonAlpha()
     }
-    let addButton = UIButton().createSimpleButton(title: "追加") {
-        print("add")
+    lazy var addButton = UIButton().createSimpleButton(title: "追加") {
+        self.addTask()
     }
     
     override func viewDidLoad() {
@@ -94,5 +95,22 @@ class AddViewController: UIViewController {
         UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveEaseInOut], animations: {
             self.clearButton.alpha = self.limitTextField.isEmpty ? 0 : 1
         }, completion: nil)
+    }
+    
+    private func addTask() {
+        let task = Task()
+        
+        task.title = self.titleTextField.text!
+        if !self.lengthTextField.isEmpty {
+            task.length = Int(lengthTextField.text!)
+        }
+        if !self.limitTextField.isEmpty {
+            task.limit = self.limitTextField.selectedDate
+        }
+        
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(task)
+        }
     }
 }
