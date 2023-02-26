@@ -9,8 +9,6 @@ import UIKit
 
 class LimitTextField: AddTextField {
     
-    let formatter = DateFormatter()
-    
     let limitDatePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.preferredDatePickerStyle = .inline
@@ -52,7 +50,7 @@ class LimitTextField: AddTextField {
     }
     
     private func updateTextField(newDate: Date) {
-        formatter.dateFormat = "M月d日(EEE)"
-        self.text = formatter.string(from: newDate)
+        self.text = newDate.toLongStringWithCurrentLocale()
     }
+    
 }

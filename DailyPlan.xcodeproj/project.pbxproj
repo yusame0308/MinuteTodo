@@ -16,6 +16,7 @@
 		1A95DD9C29A66C7100526975 /* UITextField-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95DD9B29A66C7100526975 /* UITextField-Extension.swift */; };
 		1A95DD9F29A7B90E00526975 /* HorizontalPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95DD9E29A7B90E00526975 /* HorizontalPanGestureRecognizer.swift */; };
 		1A95DDA329AAC11D00526975 /* SwipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95DDA229AAC11D00526975 /* SwipeButton.swift */; };
+		1A95DDA529ABE56900526975 /* Date-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A95DDA429ABE56900526975 /* Date-Extension.swift */; };
 		1A9B3FC02994EE07009D5B6C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B3FBF2994EE06009D5B6C /* Task.swift */; };
 		1AAD3D59295DC2D80059B107 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 1AAD3D58295DC2D80059B107 /* Realm */; };
 		1AAD3D5B295DC2D80059B107 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1AAD3D5A295DC2D80059B107 /* RealmSwift */; };
@@ -38,6 +39,7 @@
 		1A95DD9B29A66C7100526975 /* UITextField-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField-Extension.swift"; sourceTree = "<group>"; };
 		1A95DD9E29A7B90E00526975 /* HorizontalPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		1A95DDA229AAC11D00526975 /* SwipeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeButton.swift; sourceTree = "<group>"; };
+		1A95DDA429ABE56900526975 /* Date-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date-Extension.swift"; sourceTree = "<group>"; };
 		1A9B3FBF2994EE06009D5B6C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		1AB015882900360600F7413F /* UIView-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extension.swift"; sourceTree = "<group>"; };
 		1AB0158E291373C700F7413F /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				1A95DD9729A63CCC00526975 /* UIBarButtonItem-Extension.swift */,
 				1A95DD9929A656E800526975 /* UIButton-Extension.swift */,
 				1A95DD9B29A66C7100526975 /* UITextField-Extension.swift */,
+				1A95DDA429ABE56900526975 /* Date-Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				1A95DD9429A200E700526975 /* LimitTextField.swift in Sources */,
 				1AB077CC28DC05B600660B41 /* AppDelegate.swift in Sources */,
 				1A95DD9C29A66C7100526975 /* UITextField-Extension.swift in Sources */,
+				1A95DDA529ABE56900526975 /* Date-Extension.swift in Sources */,
 				1A95DD8D2996496000526975 /* AddViewController.swift in Sources */,
 				1AB0158F291373C700F7413F /* TaskTableViewCell.swift in Sources */,
 				1A95DD9A29A656E800526975 /* UIButton-Extension.swift in Sources */,
