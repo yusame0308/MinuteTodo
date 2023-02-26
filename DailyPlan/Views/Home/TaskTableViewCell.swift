@@ -12,6 +12,8 @@ class TaskTableViewCell: UITableViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byClipping
         return label
     }()
     
@@ -39,6 +41,16 @@ class TaskTableViewCell: UITableViewCell {
     let deleteButton = SwipeButton(imageName: "trash", color: .systemRed, radius: 4)
     
     lazy var titleLabelInitialWidth = titleLabel.frame.width
+    
+    var showsSwipeButtons: Bool = false {
+        didSet {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
+                self.setPositions(x: self.showsSwipeButtons ? -140 : 0)
+            }, completion: nil)
+        }
+    }
+    
+    var isSwiping = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -83,6 +95,9 @@ class TaskTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        if showsSwipeButtons && !isSwiping {
+            setPositions(x: -140)
+        }
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10))
     }
     
@@ -140,25 +155,49 @@ extension TaskTableViewCell {
     @objc private func swipeAction(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
         
-        if gesture.state == .changed {
-            self.handleSwipeChanged(translation: translation)
-        } else if gesture.state == .ended {
-            self.handleSwipeEnded(translation: translation)
+        var x = translation.x
+        if showsSwipeButtons {
+            x -= 140
+        }
+        
+        switch gesture.state {
+        case .began:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                self.isSwiping = true
+            }
+        case .changed:
+            self.handleSwipeChanged(x: x)
+        case .ended:
+            self.handleSwipeEnded(x: x)
+            self.isSwiping = false
+        default:
+            break
         }
     }
     
-    private func handleSwipeChanged(translation: CGPoint) {
-        self.limitLabel.transform = CGAffineTransform(translationX: translation.x, y: 0)
-        self.titleLabel.frame.size.width = titleLabelInitialWidth + translation.x
-        
-        self.editButton.frame.size.width = -translation.x / 2
-        self.editButton.transform = CGAffineTransform(translationX: translation.x + 0.1, y: 0)
-        self.deleteButton.frame.size.width = -translation.x / 2
-        self.deleteButton.transform = CGAffineTransform(translationX: translation.x / 2, y: 0)
+    private func handleSwipeChanged(x: CGFloat) {
+        switch x {
+        case ...(-140):
+            setPositions(x: -140)
+        case 0...:
+            setPositions(x: 0)
+        default:
+            setPositions(x: x)
+        }
     }
     
-    private func handleSwipeEnded(translation: CGPoint) {
-        print("ended")
+    private func handleSwipeEnded(x: CGFloat) {
+        showsSwipeButtons = showsSwipeButtons ? x < -100 : x < -40
+    }
+    
+    private func setPositions(x: CGFloat) {
+        self.limitLabel.transform = CGAffineTransform(translationX: x, y: 0)
+        self.titleLabel.frame.size.width = titleLabelInitialWidth + x
+        
+        self.editButton.frame.size.width = -x / 2
+        self.editButton.transform = CGAffineTransform(translationX: x + 0.1, y: 0)
+        self.deleteButton.frame.size.width = -x / 2
+        self.deleteButton.transform = CGAffineTransform(translationX: x / 2, y: 0)
     }
     
 }
