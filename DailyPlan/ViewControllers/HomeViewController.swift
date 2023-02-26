@@ -12,10 +12,6 @@ class HomeViewController: UIViewController {
     
     private let cellId = "cellId"
     
-    var titles: [String] = ["0番上のセル", "セル", "2番目のセルテストテストあああああああああああああああああああ", "test", "test", "test", "test", "test", "test", "test", "test", "test"]
-    var times: [Int] = [30, 40, 120, 120, 120, 120, 120, 120, 120, 120, 120, 120]
-    var limits: [String] = ["11/1", "11/12", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25", "11/25"]
-    
     var taskItems: Results<Task>!
     
     lazy var taskTableView: UITableView = {
@@ -88,16 +84,17 @@ class HomeViewController: UIViewController {
             taskTableView.contentInset.bottom = self.view.frame.height/2-50
         })
     }
+    
 }
 
 extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titles.count
+        return taskItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TaskTableViewCell
-        cell.setCell(title: titles[indexPath.row], time: times[indexPath.row], limit: limits[indexPath.row])
+        cell.setModel(task: taskItems[indexPath.row])
         
         return cell
     }

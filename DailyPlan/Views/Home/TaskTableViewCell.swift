@@ -9,6 +9,8 @@ import UIKit
 
 class TaskTableViewCell: UITableViewCell {
     
+    var task: Task!
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
@@ -137,10 +139,15 @@ class TaskTableViewCell: UITableViewCell {
         contentView.layer.shadowOpacity = 0.1
     }
     
-    func setCell(title: String, time: Int, limit: String) {
-        titleLabel.text = title
-        timeLabel.text = String(time)
-        limitLabel.text = limit
+    func setModel(task: Task) {
+        self.task = task
+        self.setLabelsFromModel()
+    }
+    
+    func setLabelsFromModel() {
+        titleLabel.text = task.title
+        timeLabel.text = task.length != nil ? String(task.length!) : nil
+        limitLabel.text = task.limit?.toShortStringWithCurrentLocale()
     }
     
     private func setupActions() {

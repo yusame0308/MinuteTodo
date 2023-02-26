@@ -26,6 +26,12 @@ class AddViewController: UIViewController {
     }
     lazy var addButton = UIButton().createSimpleButton(title: "追加") {
         self.addTask()
+        let pVC = self.presentingViewController as! HomeViewController
+        pVC.taskTableView.reloadData()
+        if let presentationController = self.presentationController {
+            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+        }
+        self.dismiss(animated: true)
     }
     
     override func viewDidLoad() {
