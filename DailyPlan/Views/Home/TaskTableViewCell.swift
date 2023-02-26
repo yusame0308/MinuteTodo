@@ -46,6 +46,7 @@ class TaskTableViewCell: UITableViewCell {
         didSet {
             UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
                 self.setPositions(x: self.showsSwipeButtons ? -140 : 0)
+                self.setButtonAlpha(alpha: self.showsSwipeButtons ? 1 : 0)
             }, completion: nil)
         }
     }
@@ -181,6 +182,10 @@ extension TaskTableViewCell {
             setPositions(x: -140)
         case 0...:
             setPositions(x: 0)
+        case -80..<0:
+            let alpha = x / -40 - 1
+            setButtonAlpha(alpha: alpha)
+            setPositions(x: x)
         default:
             setPositions(x: x)
         }
@@ -198,6 +203,11 @@ extension TaskTableViewCell {
         self.editButton.transform = CGAffineTransform(translationX: x + 0.1, y: 0)
         self.deleteButton.frame.size.width = -x / 2
         self.deleteButton.transform = CGAffineTransform(translationX: x / 2, y: 0)
+    }
+    
+    private func setButtonAlpha(alpha: CGFloat) {
+        editButton.tintColor = .white.withAlphaComponent(alpha)
+        deleteButton.tintColor = .white.withAlphaComponent(alpha)
     }
     
 }
