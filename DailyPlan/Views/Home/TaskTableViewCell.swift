@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TaskTableViewCell: UITableViewCell {
     
-    var task: Task!
+    var task: Task! {
+        didSet {
+            setLabelsFromModel()
+            setStyle(isDone: task.isDone)
+        }
+    }
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -59,31 +65,6 @@ class TaskTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        if selected {
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
-                self.hideShadow()
-            }, completion: { _ in
-                self.contentView.backgroundColor = .clear
-                UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
-                    self.addInnerShadow()
-                    self.checkmarkImageView.tintColor = .systemGreen
-                }, completion: nil)
-            })
-        } else {
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
-                self.hideShadow()
-            }, completion: { _ in
-                self.contentView.backgroundColor = .white
-                UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
-                    self.addOuterShadow()
-                    self.checkmarkImageView.tintColor = .systemGray
-                }, completion: nil)
-            })
-        }
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
@@ -122,7 +103,24 @@ class TaskTableViewCell: UITableViewCell {
         limitLabel.anchor(left: titleLabel.rightAnchor, right: self.rightAnchor, centerY: self.centerYAnchor, width: 50, leftPadding: 10, rightPadding: 10)
         editButton.anchor(top: self.topAnchor, bottom: self.bottomAnchor, width: 0, topPadding: 8, bottomPadding: 8)
         deleteButton.anchor(top: self.topAnchor, bottom: self.bottomAnchor, left: editButton.rightAnchor, right: self.rightAnchor, width: 0, topPadding: 8, bottomPadding: 8, rightPadding: 10)
-        
+    }
+    
+    private func setStyle(isDone: Bool) {
+        self.contentView.backgroundColor = isDone ? .clear : .white
+        isDone ? self.addInnerShadow() : self.addOuterShadow()
+        self.checkmarkImageView.tintColor =  isDone ? .systemGreen : .systemGray
+    }
+    
+    private func setStyleWithAnimation(isDone: Bool) {
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
+            self.hideShadow()
+        }, completion: { _ in
+            self.contentView.backgroundColor = isDone ? .clear : .white
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
+                isDone ? self.addInnerShadow() : self.addOuterShadow()
+                self.checkmarkImageView.tintColor = isDone ? .systemGreen : .systemGray
+            }, completion: nil)
+        })
     }
     
     private func addInnerShadow() {
@@ -141,10 +139,9 @@ class TaskTableViewCell: UITableViewCell {
     
     func setModel(task: Task) {
         self.task = task
-        self.setLabelsFromModel()
     }
     
-    func setLabelsFromModel() {
+    private func setLabelsFromModel() {
         titleLabel.text = task.title
         timeLabel.text = task.length != nil ? String(task.length!) : nil
         limitLabel.text = task.limit?.toShortStringWithCurrentLocale()
@@ -153,6 +150,18 @@ class TaskTableViewCell: UITableViewCell {
     private func setupActions() {
         let swipeGesture = HorizontalPanGestureRecognizer(target: self, action: #selector(swipeAction))
         self.contentView.addGestureRecognizer(swipeGesture)
+    }
+    
+    func updateIsDoneAndSetStyle() {
+        self.updateIsDone()
+        self.setStyleWithAnimation(isDone: task.isDone)
+    }
+    
+    private func updateIsDone() {
+        let realm = try! Realm()
+        try! realm.write {
+            task.isDone.toggle()
+        }
     }
     
 }

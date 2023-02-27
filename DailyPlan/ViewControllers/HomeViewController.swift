@@ -98,6 +98,11 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! TaskTableViewCell
+        cell.updateIsDoneAndSetStyle()
+    }
 }
 
 extension HomeViewController: UIAdaptivePresentationControllerDelegate {
