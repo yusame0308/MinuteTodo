@@ -153,6 +153,9 @@ class TaskTableViewCell: UITableViewCell {
     }
     
     func updateIsDoneAndSetStyle() {
+        if self.showsSwipeButtons {
+            return
+        }
         self.updateIsDone()
         self.setStyleWithAnimation(isDone: task.isDone)
     }
