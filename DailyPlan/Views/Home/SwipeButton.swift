@@ -9,14 +9,15 @@ import UIKit
 
 class SwipeButton: UIButton {
     
-    init(imageName: String, color: UIColor, radius: CGFloat = 0) {
+    init(imageName: String, color: UIColor, isAtEnd: Bool = false) {
         super.init(frame: .zero)
         
         setImage(UIImage(systemName: imageName, withConfiguration: UIImage.SymbolConfiguration(weight: .bold)), for: .normal)
         tintColor = .white
         backgroundColor = color.withAlphaComponent(0.4)
-        layer.cornerRadius = radius
+        layer.cornerRadius = isAtEnd ? 4 : 0
         layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {

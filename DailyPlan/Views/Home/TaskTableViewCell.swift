@@ -46,7 +46,20 @@ class TaskTableViewCell: UITableViewCell {
     
     let editButton = SwipeButton(imageName: "square.and.pencil", color: .systemBlue)
     
-    let deleteButton = SwipeButton(imageName: "trash", color: .systemRed, radius: 4)
+    let deleteButton = SwipeButton(imageName: "trash", color: .systemRed, isAtEnd: true)
+    
+    lazy var swipeButtonConstraints = [
+        [editButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+         editButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
+         deleteButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+         deleteButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
+         deleteButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10)],
+        [editButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 9),
+         editButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -9),
+         deleteButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 9),
+         deleteButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -9),
+         deleteButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -11)]
+    ]
     
     lazy var titleLabelInitialWidth = titleLabel.frame.width
     
@@ -101,8 +114,26 @@ class TaskTableViewCell: UITableViewCell {
         titleLabel.anchor(top: self.topAnchor, left: checkmarkImageView.rightAnchor, topPadding: 20, leftPadding: 15)
         timeLabel.anchor(top: titleLabel.bottomAnchor, bottom: self.bottomAnchor, left: titleLabel.leftAnchor, bottomPadding: 20)
         limitLabel.anchor(left: titleLabel.rightAnchor, right: self.rightAnchor, centerY: self.centerYAnchor, width: 50, leftPadding: 10, rightPadding: 10)
-        editButton.anchor(top: self.topAnchor, bottom: self.bottomAnchor, width: 0, topPadding: 8, bottomPadding: 8)
-        deleteButton.anchor(top: self.topAnchor, bottom: self.bottomAnchor, left: editButton.rightAnchor, right: self.rightAnchor, width: 0, topPadding: 8, bottomPadding: 8, rightPadding: 10)
+        editButton.anchor(width: 0)
+        deleteButton.anchor(left: editButton.rightAnchor, width: 0)
+    }
+    
+    private func setButtonConstraints() {
+        if task.isDone {
+            for c in swipeButtonConstraints[0] {
+                c.isActive = false
+            }
+            for c in swipeButtonConstraints[1] {
+                c.isActive = true
+            }
+        } else {
+            for c in swipeButtonConstraints[1] {
+                c.isActive = false
+            }
+            for c in swipeButtonConstraints[0] {
+                c.isActive = true
+            }
+        }
     }
     
     private func setStyle(isDone: Bool) {
@@ -182,6 +213,7 @@ extension TaskTableViewCell {
         
         switch gesture.state {
         case .began:
+            setButtonConstraints()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 self.isSwiping = true
             }
