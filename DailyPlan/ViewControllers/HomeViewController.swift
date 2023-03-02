@@ -95,6 +95,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TaskTableViewCell
         cell.setModel(task: taskItems[indexPath.row])
+        cell.setTableView(tv: tableView)
         
         return cell
     }

@@ -10,6 +10,8 @@ import RealmSwift
 
 class TaskTableViewCell: UITableViewCell {
     
+    var tableView: UITableView!
+    
     var task: Task! {
         didSet {
             setLabelsFromModel()
@@ -168,6 +170,10 @@ class TaskTableViewCell: UITableViewCell {
         contentView.layer.shadowOpacity = 0.1
     }
     
+    func setTableView(tv: UITableView) {
+        self.tableView = tv
+    }
+    
     func setModel(task: Task) {
         self.task = task
     }
@@ -182,13 +188,31 @@ class TaskTableViewCell: UITableViewCell {
         let swipeGesture = HorizontalPanGestureRecognizer(target: self, action: #selector(swipeAction))
         self.contentView.addGestureRecognizer(swipeGesture)
         
-        deleteButton.addAction(UIAction { _ in
-            print("del")
+        deleteButton.addAction(UIAction { [self] _ in
+            let realm = try! Realm()
+            try! realm.write {
+                realm.delete(task)
+            }
+            closeAllCellsSwipeButtons()
+            UIView.animate(withDuration: 0.3, animations: {
+                self.alpha = 0.0
+            }) { _ in
+                self.tableView.reloadData()
+            }
         }, for: .primaryActionTriggered)
         
         editButton.addAction(UIAction { _ in
             print("edit")
         }, for: .primaryActionTriggered)
+    }
+    
+    private func closeAllCellsSwipeButtons() {
+        for c in tableView.visibleCells {
+            let cell = c as! TaskTableViewCell
+            if cell.showsSwipeButtons {
+                cell.showsSwipeButtons = false
+            }
+        }
     }
     
     func updateIsDoneAndSetStyle() {
