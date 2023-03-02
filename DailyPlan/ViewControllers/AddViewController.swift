@@ -71,6 +71,8 @@ class AddViewController: UIViewController {
     }
     
     private func setupLayout() {
+        lengthTextField.delegate = self
+        
         let baseStackView = UIStackView(arrangedSubviews: [titleTextField, lengthTextField, limitTextField])
         baseStackView.axis = .vertical
         baseStackView.distribution = .equalSpacing
@@ -166,5 +168,12 @@ class AddViewController: UIViewController {
         if let limit = task.limit {
             self.limitTextField.selectedDate = limit
         }
+    }
+}
+
+extension AddViewController: UITextFieldDelegate {
+    // 数字のみ入力を許可
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return string.count == 0 || string.rangeOfCharacter(from: CharacterSet(charactersIn: "0123456789")) != nil
     }
 }
