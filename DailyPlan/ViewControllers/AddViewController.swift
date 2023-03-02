@@ -9,6 +9,9 @@ import UIKit
 import RealmSwift
 
 class AddViewController: UIViewController {
+    private let isEdit: Bool
+    private var task: Task?
+    
     private let gradientLayer = CAGradientLayer()
     let titleTextField = AddTextField(placeHolder: "タイトル")
     let lengthTextField = AddTextField(placeHolder: "所要時間", type: .numberPad, fontSize: 15)
@@ -24,14 +27,29 @@ class AddViewController: UIViewController {
         self.limitTextField.text = ""
         self.changeClearButtonAlpha()
     }
-    lazy var addButton = UIButton().createSimpleButton(title: "追加") {
-        self.addTask()
+    lazy var addButton = UIButton().createSimpleButton(title: isEdit ? "完了" : "追加") {
+        self.isEdit ? self.updateTask() : self.addTask()
         let pVC = self.presentingViewController as! HomeViewController
+        pVC.taskTableView.closeAllCellsSwipeButton()
         pVC.taskTableView.reloadData()
         if let presentationController = self.presentationController {
             presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
         }
         self.dismiss(animated: true)
+    }
+    
+    init(isEdit: Bool = false, task: Task?) {
+        self.isEdit = isEdit
+        self.task = task
+        super.init(nibName: nil, bundle: nil)
+        
+        if let task = self.task {
+            self.setupTextFields(task: task)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -61,10 +79,10 @@ class AddViewController: UIViewController {
         view.addSubview(clearButton)
         view.addSubview(addButton)
         
-        minuteLabel.alpha = 0
-        clearButton.alpha = 0
-        addButton.alpha = 0.4
-        addButton.isEnabled = false
+        minuteLabel.alpha = self.lengthTextField.isEmpty ? 0 : 1
+        clearButton.alpha = self.limitTextField.isEmpty ? 0 : 1
+        addButton.alpha = self.titleTextField.isEmpty ? 0.4 : 1.0
+        addButton.isEnabled = !self.titleTextField.isEmpty
         
         titleTextField.anchor(left: baseStackView.leftAnchor, right: baseStackView.rightAnchor, height: 40)
         lengthTextField.anchor(width: 80, height: 30)
@@ -117,6 +135,31 @@ class AddViewController: UIViewController {
         let realm = try! Realm()
         try! realm.write {
             realm.add(task)
+        }
+    }
+    
+    private func updateTask() {
+        guard let task = self.task else { return }
+        
+        let realm = try! Realm()
+        try! realm.write {
+            task.title = self.titleTextField.text!
+            if !self.lengthTextField.isEmpty {
+                task.length = Int(lengthTextField.text!)
+            }
+            if !self.limitTextField.isEmpty {
+                task.limit = self.limitTextField.selectedDate
+            }
+        }
+    }
+    
+    private func setupTextFields(task: Task) {
+        self.titleTextField.text = task.title
+        if let length = task.length {
+            self.lengthTextField.text = String(length)
+        }
+        if let limit = task.limit {
+            self.limitTextField.selectedDate = limit
         }
     }
 }

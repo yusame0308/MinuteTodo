@@ -8,7 +8,13 @@
 import UIKit
 import RealmSwift
 
+protocol TaskTableViewCellDelegate : AnyObject {
+    func editButtonDidPressed(_ cell: TaskTableViewCell)
+}
+
 class TaskTableViewCell: UITableViewCell {
+    
+    weak var delegate: TaskTableViewCellDelegate?
     
     var tableView: UITableView!
     
@@ -202,8 +208,8 @@ class TaskTableViewCell: UITableViewCell {
             }
         }, for: .primaryActionTriggered)
         
-        editButton.addAction(UIAction { _ in
-            print("edit")
+        editButton.addAction(UIAction { [self] _ in
+            delegate?.editButtonDidPressed(self)
         }, for: .primaryActionTriggered)
     }
     

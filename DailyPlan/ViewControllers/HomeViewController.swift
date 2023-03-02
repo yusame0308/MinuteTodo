@@ -34,7 +34,7 @@ class HomeViewController: UIViewController {
         button.backgroundColor = .white
         button.addShadow()
         button.addAction(UIAction { [self] _ in
-            self.showModal()
+            showModal()
         }, for: .primaryActionTriggered)
         return button
     }()
@@ -72,8 +72,11 @@ class HomeViewController: UIViewController {
         addButton.anchor(top: taskTableView.bottomAnchor, bottom: view.bottomAnchor, centerX: view.centerXAnchor, width: 50, height: 50, topPadding: 15, bottomPadding: 30)
     }
     
-    private func showModal() {
-        let vc = AddViewController()
+    private func showModal(isEdit: Bool = false, task: Task? = nil) {
+        if let pVC = presentedViewController {
+            pVC.dismiss(animated: true)
+        }
+        let vc = AddViewController(isEdit: isEdit, task: task)
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium()]
             sheet.largestUndimmedDetentIdentifier = .medium
@@ -96,6 +99,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TaskTableViewCell
         cell.setModel(task: taskItems[indexPath.row])
         cell.setTableView(tv: tableView)
+        cell.delegate = self
         
         return cell
     }
@@ -111,10 +115,18 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
 }
 
 extension HomeViewController: UIAdaptivePresentationControllerDelegate {
-    //Modalのdismissを検知
+    // Modalのdismissを検知
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseInOut], animations: {
             self.taskTableView.contentInset.bottom = 0
         }, completion: nil)
+    }
+}
+
+extension HomeViewController: TaskTableViewCellDelegate {
+    // CellのEditButtonタップを検知
+    func editButtonDidPressed(_ cell: TaskTableViewCell) {
+        taskTableView.closeAllCellsSwipeButton()
+        showModal(isEdit: true, task: cell.task)
     }
 }
