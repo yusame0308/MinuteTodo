@@ -38,6 +38,9 @@ class AddViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    private let maxTitleLength = 50
+    private let maxMinuteLength = 4
+    
     init(isEdit: Bool = false, task: Task?) {
         self.isEdit = isEdit
         self.task = task
@@ -104,12 +107,14 @@ class AddViewController: UIViewController {
                     self.addButton.alpha = 1.0
                     self.addButton.isEnabled = true
                 }
+                self.titleTextField.validateWithMaxLength(self.maxTitleLength)
             }, completion: nil)
         }, for: .editingChanged)
         
         lengthTextField.addAction(UIAction { _ in
             UIView.animate(withDuration: 0.3, delay: 0.2, options: [.curveEaseInOut], animations: {
                 self.minuteLabel.alpha = self.lengthTextField.isEmpty ? 0 : 1
+                self.lengthTextField.validateWithMaxLength(self.maxMinuteLength)
             }, completion: nil)
         }, for: .editingChanged)
         

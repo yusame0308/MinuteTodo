@@ -13,4 +13,12 @@ extension UITextField {
         return self.text?.isEmpty ?? true
     }
     
+    func validateWithMaxLength(_ length: Int) {
+        guard let text = self.text else { return }
+        
+        if text.count > length {
+            self.text = text.prefix(length).description
+        }
+    }
+    
 }
