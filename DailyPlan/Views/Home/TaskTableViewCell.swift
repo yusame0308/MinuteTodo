@@ -193,7 +193,8 @@ class TaskTableViewCell: UITableViewCell {
             try! realm.write {
                 realm.delete(task)
             }
-            closeAllCellsSwipeButtons()
+            
+            tableView.closeAllCellsSwipeButton()
             UIView.animate(withDuration: 0.3, animations: {
                 self.alpha = 0.0
             }) { _ in
@@ -204,15 +205,6 @@ class TaskTableViewCell: UITableViewCell {
         editButton.addAction(UIAction { _ in
             print("edit")
         }, for: .primaryActionTriggered)
-    }
-    
-    private func closeAllCellsSwipeButtons() {
-        for c in tableView.visibleCells {
-            let cell = c as! TaskTableViewCell
-            if cell.showsSwipeButtons {
-                cell.showsSwipeButtons = false
-            }
-        }
     }
     
     func updateIsDoneAndSetStyle() {

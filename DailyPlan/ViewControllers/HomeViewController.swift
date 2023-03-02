@@ -106,12 +106,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        for c in taskTableView.visibleCells {
-            let cell = c as! TaskTableViewCell
-            if cell.showsSwipeButtons {
-                cell.showsSwipeButtons = false
-            }
-        }
+        taskTableView.closeAllCellsSwipeButton()
     }
 }
 
