@@ -44,7 +44,7 @@ class TaskTableViewCell: UITableViewCell {
         return iv
     }()
     
-    let editButton = SwipeButton(imageName: "square.and.pencil", color: .systemBlue)
+    let editButton = SwipeButton(imageName: "square.and.pencil", color: .systemCyan)
     
     let deleteButton = SwipeButton(imageName: "trash", color: .systemRed, isAtEnd: true)
     
@@ -181,6 +181,14 @@ class TaskTableViewCell: UITableViewCell {
     private func setupActions() {
         let swipeGesture = HorizontalPanGestureRecognizer(target: self, action: #selector(swipeAction))
         self.contentView.addGestureRecognizer(swipeGesture)
+        
+        deleteButton.addAction(UIAction { _ in
+            print("del")
+        }, for: .primaryActionTriggered)
+        
+        editButton.addAction(UIAction { _ in
+            print("edit")
+        }, for: .primaryActionTriggered)
     }
     
     func updateIsDoneAndSetStyle() {

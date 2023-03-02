@@ -12,7 +12,10 @@ class SwipeButton: UIButton {
     init(imageName: String, color: UIColor, isAtEnd: Bool = false) {
         super.init(frame: .zero)
         
-        setImage(UIImage(systemName: imageName, withConfiguration: UIImage.SymbolConfiguration(weight: .bold)), for: .normal)
+        let normalImage = UIImage(systemName: imageName, withConfiguration: UIImage.SymbolConfiguration(weight: .medium))
+        let highlightedImage = UIImage(systemName: imageName, withConfiguration: UIImage.SymbolConfiguration(paletteColors: [.white.withAlphaComponent(0.7), .white.withAlphaComponent(0.7)]))
+        setImage(normalImage, for: .normal)
+        setImage(highlightedImage, for: .highlighted)
         tintColor = .white
         backgroundColor = color.withAlphaComponent(0.4)
         layer.cornerRadius = isAtEnd ? 4 : 0
