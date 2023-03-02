@@ -27,4 +27,11 @@ class AddTextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(copy(_:)) {
+            return true
+        }
+        return false
+    }
+    
 }
