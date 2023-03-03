@@ -129,4 +129,12 @@ extension HomeViewController: TaskTableViewCellDelegate {
         taskTableView.closeAllCellsSwipeButton()
         showModal(isEdit: true, task: cell.task)
     }
+    // CellのDeleteButtonタップを検知
+    func deleteButtonDidPressed(_ cell: TaskTableViewCell) {
+        if let pVC = presentedViewController as? AddViewController {
+            if pVC.task.hashValue == cell.task.hashValue {
+                pVC.dismissModal()
+            }
+        }
+    }
 }

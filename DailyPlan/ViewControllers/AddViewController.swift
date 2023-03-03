@@ -10,7 +10,7 @@ import RealmSwift
 
 class AddViewController: UIViewController {
     private let isEdit: Bool
-    private var task: Task?
+    var task: Task?
     
     private let gradientLayer = CAGradientLayer()
     let titleTextField = AddTextField(placeHolder: "タイトル")
@@ -32,10 +32,7 @@ class AddViewController: UIViewController {
         let pVC = self.presentingViewController as! HomeViewController
         pVC.taskTableView.closeAllCellsSwipeButton()
         pVC.taskTableView.reloadData()
-        if let presentationController = self.presentationController {
-            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
-        }
-        self.dismiss(animated: true)
+        self.dismissModal()
     }
     
     private let maxTitleLength = 50
@@ -168,6 +165,13 @@ class AddViewController: UIViewController {
         if let limit = task.limit {
             self.limitTextField.selectedDate = limit
         }
+    }
+    
+    func dismissModal() {
+        if let presentationController = self.presentationController {
+            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+        }
+        self.dismiss(animated: true)
     }
 }
 

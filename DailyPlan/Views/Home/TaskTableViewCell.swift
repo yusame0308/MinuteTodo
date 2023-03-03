@@ -10,6 +10,7 @@ import RealmSwift
 
 protocol TaskTableViewCellDelegate : AnyObject {
     func editButtonDidPressed(_ cell: TaskTableViewCell)
+    func deleteButtonDidPressed(_ cell: TaskTableViewCell)
 }
 
 class TaskTableViewCell: UITableViewCell {
@@ -195,6 +196,8 @@ class TaskTableViewCell: UITableViewCell {
         self.contentView.addGestureRecognizer(swipeGesture)
         
         deleteButton.addAction(UIAction { [self] _ in
+            delegate?.deleteButtonDidPressed(self)
+            
             let realm = try! Realm()
             try! realm.write {
                 realm.delete(task)
