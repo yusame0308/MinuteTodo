@@ -1,5 +1,5 @@
 
-# MinuteTodo -所要時間が設定できるシンプルなTodoリスト
+# 時間Todo -所要時間が設定できるシンプルなTodoリスト
 
 ![mts](https://user-images.githubusercontent.com/58395096/233432233-a7b9c1df-64e5-4327-9376-abb0f8271c5c.png)
 
