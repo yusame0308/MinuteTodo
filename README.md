@@ -9,7 +9,6 @@
 - RealmSwift
 
 ## ポイント
-- StoryBoardを使わず、UIKitとAutoLayoutでUIを開発
-- UITableViewCellのcontentViewに余白を設けたため、デフォルトのスワイプアクションだと余白や角丸を考慮せずに削除ボタンが表示されてしまう。そのため、contentViewの形に合うように自分で編集・削除ボタンを用意し、UIPanGestureRecognizerでスワイプ処理を実装した。（画像２枚目を参照）<br>
-またこの時の工夫点として、スワイプしてもタイトルラベル（画像だと「買い物に行く」）が動かないようにした。デフォルトのスワイプアクションだとタイトルラベルも一緒に動くため、スワイプするとタイトルの左側が見切れてしまう。<br>
+- StoryBoardを使わず、UIKitとAutoLayoutでUIを開発した。
+- UIPanGestureRecognizerを使ってカスタムのスワイプアクションを実装した。(画像2枚目)<br>
 [対応箇所のコード](https://github.com/yusame0308/MinuteTodo/blob/ce40df46b75fe25d8bc7cef8e307431a6e82d26d/DailyPlan/Views/Home/TaskTableViewCell.swift#L236-L290)
