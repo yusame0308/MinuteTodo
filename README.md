@@ -9,6 +9,6 @@
 - RealmSwift
 
 ## ポイント
-- StoryBoardを使わず、UIKitとAutoLayoutでUIを開発した。
+- StoryBoardを使わず、UIKitのコードのみでUIを開発した。
 - UIPanGestureRecognizerを使ってカスタムのスワイプアクションを実装した。(画像2枚目)<br>
 [対応箇所のコード](https://github.com/yusame0308/MinuteTodo/blob/ce40df46b75fe25d8bc7cef8e307431a6e82d26d/DailyPlan/Views/Home/TaskTableViewCell.swift#L236-L290)
